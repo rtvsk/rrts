@@ -21,20 +21,15 @@ export interface DeleteTodoAction {
 
 const url = 'https://jsonplaceholder.typicode.com/todos';
 
-export const fetchTodos = () => {
-  return async (dispatch: Dispatch) => {
-    const res = await axios.get<Todo[]>(url);
-
-    dispatch<FetchTodosAction>({
-      type: ActionTypes.fetchTodos,
-      payload: res.data
-    });
-  };
+export const fetchTodos = () => async (dispatch: Dispatch) => {
+  const res = await axios.get<Todo[]>(url);
+  dispatch<FetchTodosAction>({
+    type: ActionTypes.fetchTodos,
+    payload: res.data,
+  });
 };
 
-export const deleteTodo = (id: number): DeleteTodoAction => {
-  return {
-    type: ActionTypes.deleteTodo,
-    payload: id
-  };
-};
+export const deleteTodo = (id: number): DeleteTodoAction => ({
+  type: ActionTypes.deleteTodo,
+  payload: id,
+});
